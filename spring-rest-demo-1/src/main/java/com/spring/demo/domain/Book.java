@@ -1,24 +1,39 @@
 package com.spring.demo.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Book {
 
-	private String id;
+	private int id;
+	private String uuid;
 	private String name;
 	private String description;
 	
 	@Id
-	public String getId() {
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
+	@Column(length=300)
+	public String getUuid() {
+		return uuid;
+	}
+	
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	
+	@Column(length=300)
 	public String getName() {
 		return name;
 	}
@@ -27,6 +42,7 @@ public class Book {
 		this.name = name;
 	}
 	
+	@Column(length=1000)
 	public String getDescription() {
 		return description;
 	}
