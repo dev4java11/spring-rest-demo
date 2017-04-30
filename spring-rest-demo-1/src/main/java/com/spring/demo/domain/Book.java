@@ -5,6 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Book {
@@ -13,6 +20,8 @@ public class Book {
 	private String uuid;
 	private String name;
 	private String description;
+	private Integer yearOfPublish;
+	private String email;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,6 +43,8 @@ public class Book {
 	}
 	
 	@Column(length=300)
+	@NotNull
+	@Size(min = 0, max = 200)
 	public String getName() {
 		return name;
 	}
@@ -43,11 +54,32 @@ public class Book {
 	}
 	
 	@Column(length=1000)
+	@Size(min = 0, max = 1000)
 	public String getDescription() {
 		return description;
 	}
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@Min(1200)
+	public Integer getYearOfPublish() {
+		return yearOfPublish;
+	}
+	
+	public void setYearOfPublish(Integer yearOfPublish) {
+		this.yearOfPublish = yearOfPublish;
+	}
+	
+	@Email
+	@NotEmpty
+	@Length(max = 140)
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.demo.domain.Book;
+import com.spring.demo.exception.DomainNotFoundException;
 import com.spring.demo.repository.BookRepository;
 import com.spring.demo.service.BookService;
 
@@ -24,12 +25,20 @@ public class BookServiceImpl implements BookService {
 	
 	@Override
 	public Book findById(Integer id) {
-		return repository.findOne(id);
+		Book book = repository.findOne(id);
+		if(book == null){
+			throw new DomainNotFoundException(Book.class, id);
+		}
+		return book;
 	}
 	
 	@Override
 	public Book findByUuid(String uuid) {
-		return repository.findByUuid(uuid);
+		Book book = repository.findByUuid(uuid);
+		if(book == null){
+			throw new DomainNotFoundException(Book.class, uuid);
+		}
+		return book;
 	}
 
 	@Override
@@ -50,13 +59,26 @@ public class BookServiceImpl implements BookService {
 	@Transactional
 	@Override
 	public Book update(Book book) {
-		return repository.save(book);
+		Book bookDB = repository.findOne(book.getId());
+		if(bookDB == null){
+			throw new DomainNotFoundException(Book.class, book.getId());
+		}
+		
+		bookDB.setName(book.getName());
+		bookDB.setDescription(book.getDescription());
+		bookDB.setYearOfPublish(book.getYearOfPublish());
+		bookDB.setEmail(book.getEmail());
+		
+		return repository.save(bookDB);
 	}
 	
 	@Transactional
 	@Override
 	public Book delete(Integer id) {
 		Book book = repository.findOne(id);
+		if(book == null){
+			throw new DomainNotFoundException(Book.class, id);
+		}
 		repository.delete(id);
 		return book;
 	}
@@ -65,6 +87,9 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book delete(String uuid) {
 		Book book = repository.findByUuid(uuid);
+		if(book == null){
+			throw new DomainNotFoundException(Book.class, uuid);
+		}
 		repository.delete(book);
 		return book;
 	}
@@ -72,6 +97,10 @@ public class BookServiceImpl implements BookService {
 	@Transactional
 	@Override
 	public Book delete(Book book) {
+		boolean exists = repository.exists(book.getId());
+		if(!exists){
+			throw new DomainNotFoundException(Book.class, book.getId());
+		}
 		repository.delete(book);
 		return book;
 	}

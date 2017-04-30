@@ -2,6 +2,8 @@ package com.spring.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
@@ -48,13 +50,13 @@ public class BookController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Book> create(@RequestBody Book book){
+	public ResponseEntity<Book> create(@RequestBody @Valid Book book){
 		book = service.create(book);
 		return new ResponseEntity<Book>(book, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Book> update(@PathVariable(name = "id", required = true) Integer id, @RequestBody Book book){
+	public ResponseEntity<Book> update(@PathVariable(name = "id", required = true) Integer id, @RequestBody @Valid Book book){
 		book.setId(id);
 		book = service.update(book);
 		return ResponseEntity.ok(book);

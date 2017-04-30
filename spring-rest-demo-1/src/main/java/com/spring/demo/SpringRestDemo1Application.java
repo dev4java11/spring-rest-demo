@@ -50,24 +50,32 @@ public class SpringRestDemo1Application {
 			book1.setUuid(UUID.randomUUID().toString());
 			book1.setName("El Ingenioso Hidalgo Don Quijote de la Mancha");
 			book1.setDescription("Obra escrita por Miguel de Cervantes Saavedra.");
+			book1.setYearOfPublish(1992);
+			book1.setEmail("cervantes@book.com");
 			
 			Book book2 = new Book();
 //			book2.setId("2");
 			book2.setUuid(UUID.randomUUID().toString());
 			book2.setName("Los Heraldos Negros");
 			book2.setDescription("Obra escrita por Cesar Vallejo.");
+			book2.setYearOfPublish(1930);
+			book2.setEmail("vallejo@book.com");
 			
 			Book book3 = new Book();
 //			book3.setId("3");
 			book3.setUuid(UUID.randomUUID().toString());
 			book3.setName("El viejo y el mar");
 			book3.setDescription("Obra escrita por Hernest Hemingway.");
+			book3.setYearOfPublish(1940);
+			book3.setEmail("hemingway@book.com");
 			
 			Book book4 = new Book();
 //			book4.setId("4");
 			book4.setUuid(UUID.randomUUID().toString());
 			book4.setName("La Divina Comedia");
 			book4.setDescription("Obra escrita por Dante Aliguieri.");
+			book4.setYearOfPublish(1750);
+			book4.setEmail("aliguieri@book.com");
 			
 			bookRepository.save(book1);
 			bookRepository.save(book2);
