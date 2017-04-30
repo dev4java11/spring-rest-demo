@@ -31,6 +31,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		mapper.enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		mapper.enable(SerializationFeature.USE_EQUALITY_FOR_OBJECT_ID);
 		return mapper;
 	}
 	

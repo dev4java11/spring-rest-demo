@@ -26,12 +26,18 @@ public class BookServiceImpl implements BookService {
 	public Book findById(Integer id) {
 		return repository.findOne(id);
 	}
+	
+	@Override
+	public Book findByUuid(String uuid) {
+		return repository.findByUuid(uuid);
+	}
 
 	@Override
 	public List<Book> listAllBooks() {
 		return repository.findAll();
 	}
 	
+	@Transactional
 	@Override
 	public Book create(Book book) {
 		if(book.getUuid() == null || book.getUuid().trim().isEmpty()){
@@ -41,4 +47,32 @@ public class BookServiceImpl implements BookService {
 		return book;
 	}
 
+	@Transactional
+	@Override
+	public Book update(Book book) {
+		return repository.save(book);
+	}
+	
+	@Transactional
+	@Override
+	public Book delete(Integer id) {
+		Book book = repository.findOne(id);
+		repository.delete(id);
+		return book;
+	}
+	
+	@Transactional
+	@Override
+	public Book delete(String uuid) {
+		Book book = repository.findByUuid(uuid);
+		repository.delete(book);
+		return book;
+	}
+	
+	@Transactional
+	@Override
+	public Book delete(Book book) {
+		repository.delete(book);
+		return book;
+	}
 }

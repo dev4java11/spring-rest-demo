@@ -9,4 +9,6 @@ import com.spring.demo.domain.Book;
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	
+	public Book findByUuid(String uuid);
+	
 }

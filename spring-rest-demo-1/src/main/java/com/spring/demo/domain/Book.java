@@ -9,18 +9,18 @@ import javax.persistence.Id;
 @Entity
 public class Book {
 
-	private int id;
+	private Integer id;
 	private String uuid;
 	private String name;
 	private String description;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
