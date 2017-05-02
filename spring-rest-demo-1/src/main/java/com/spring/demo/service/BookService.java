@@ -16,9 +16,11 @@ public interface BookService {
 	
 	public Book update(Book book);
 	
+	public Book updateByUuid(Book book);
+	
 	public Book delete(Integer id);
 	
-	public Book delete(String uuid);
+	public Book deleteByUuid(String uuid);
 	
 	public Book delete(Book book);
 }

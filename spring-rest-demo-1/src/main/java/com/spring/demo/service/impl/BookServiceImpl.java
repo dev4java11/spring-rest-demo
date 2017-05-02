@@ -72,6 +72,20 @@ public class BookServiceImpl implements BookService {
 		return repository.save(bookDB);
 	}
 	
+	@Override
+	public Book updateByUuid(Book book) {
+		Book bookDB = repository.findByUuid(book.getUuid());
+		if(bookDB == null){
+			throw new DomainNotFoundException(Book.class, book.getUuid());
+		}
+		bookDB.setName(book.getName());
+		bookDB.setDescription(book.getDescription());
+		bookDB.setYearOfPublish(book.getYearOfPublish());
+		bookDB.setEmail(book.getEmail());
+		
+		return repository.save(bookDB);
+	}
+	
 	@Transactional
 	@Override
 	public Book delete(Integer id) {
@@ -85,7 +99,7 @@ public class BookServiceImpl implements BookService {
 	
 	@Transactional
 	@Override
-	public Book delete(String uuid) {
+	public Book deleteByUuid(String uuid) {
 		Book book = repository.findByUuid(uuid);
 		if(book == null){
 			throw new DomainNotFoundException(Book.class, uuid);

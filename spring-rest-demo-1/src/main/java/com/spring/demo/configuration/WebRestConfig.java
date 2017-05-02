@@ -13,7 +13,7 @@ public class WebRestConfig extends RepositoryRestConfigurerAdapter{
 
 	@Override
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-		config.exposeIdsFor(Book.class);
+//		config.exposeIdsFor(Book.class);
 	}
 	
 	@Bean
